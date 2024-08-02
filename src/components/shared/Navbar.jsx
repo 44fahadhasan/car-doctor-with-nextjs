@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Button from "../common/Button";
 import Logo from "../common/Logo";
 
 const items = [
@@ -24,8 +25,8 @@ const Navbar = () => {
         <Logo />
 
         <div
-          className={`max-lg:${
-            (toggle && "block") || "hidden"
+          className={`${
+            (toggle && "max-lg:block") || "max-lg:hidden"
           } lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50`}
         >
           {/* toggle menu close button for small deivce */}
@@ -107,9 +108,7 @@ const Navbar = () => {
           </span>
 
           {/* appointment button */}
-          <button className="hidden lg:block px-4 py-2.5 text-sm rounded font-bold hover:text-white border-2 border-[#FF3811] hover:bg-[#FF3811] transition-all ease-in-out duration-300 bg-transparent text-[#FF3811]">
-            Appointment
-          </button>
+          <Button toggle={true} label={"Appointment"} outline={true} />
 
           {/* toggle menu open button for small deivce */}
           <button onClick={() => setToggle(true)} className="lg:hidden !ml-7">
