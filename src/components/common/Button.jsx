@@ -1,4 +1,4 @@
-const Button = ({ toggle, label, outline }) => {
+const Button = ({ toggle, label, outline, fullWidth }) => {
   return (
     <button
       className={`${
@@ -7,7 +7,9 @@ const Button = ({ toggle, label, outline }) => {
         (outline &&
           "hover:text-white border-2 border-[#FF3811] hover:bg-[#FF3811] bg-transparent text-[#FF3811]") ||
         "text-white bg-[#FF3811]"
-      }`}
+      }
+      ${fullWidth && "w-full"}
+      `}
     >
       {label}
     </button>
