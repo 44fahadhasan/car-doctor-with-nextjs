@@ -2,13 +2,36 @@
 import Button from "@/components/common/Button";
 import InputFiled from "@/components/common/InputFiled";
 import SmallTitle from "@/components/common/SmallTitle";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 const Login = () => {
-  const handleLogin = (event) => {
+  const router = useRouter();
+
+  // handle login
+  const handleLogin = async (event) => {
     event.preventDefault();
+
+    const input = event.target;
+
+    const email = input.email.value;
+    const password = input.password.value;
+
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    // when login succesfull then redirect home page
+    if (res?.ok) {
+      router?.push("/");
+      alert("login succesfull");
+    }
+    //
   };
 
   return (
@@ -20,7 +43,7 @@ const Login = () => {
       {/* email */}
       <InputFiled
         label={"Eamil"}
-        name={"Email"}
+        name={"email"}
         type={"eamil"}
         required={true}
         placeholder={"Your Eamil"}

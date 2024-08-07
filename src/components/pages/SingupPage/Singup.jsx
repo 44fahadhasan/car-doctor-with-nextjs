@@ -7,12 +7,39 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdEmail, MdOutlineDriveFileRenameOutline } from "react-icons/md";
 
 const Singup = () => {
-  const handleLogin = (event) => {
+  // const handle singup
+  const handleSingup = async (event) => {
     event.preventDefault();
+
+    const input = event.target;
+
+    const newUser = {
+      name: input.name.value,
+      email: input.email.value,
+      password: input.password.value,
+    };
+
+    // post request with fetch in server
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/singup`, {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "content-type": "aplication/json",
+      },
+    });
+
+    const data = await res.json();
+
+    if (data?.res?.acknowledged) {
+      input.reset();
+      alert("Account created succesfull");
+    } else if (data?.message) {
+      alert(`${data?.message}`);
+    }
   };
 
   return (
-    <form onSubmit={handleLogin} className="space-y-4">
+    <form onSubmit={handleSingup} className="space-y-4">
       <div className="mb-8">
         <SmallTitle text={"Sign Up"} size={"text-3xl"} />
       </div>
@@ -30,7 +57,7 @@ const Singup = () => {
       {/* email */}
       <InputFiled
         label={"Eamil"}
-        name={"Email"}
+        name={"email"}
         type={"eamil"}
         required={true}
         placeholder={"Your Eamil"}

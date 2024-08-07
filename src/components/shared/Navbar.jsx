@@ -1,4 +1,6 @@
 "use client";
+import LoggedUserIData from "@/hooks/LoggedUserIData";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -11,13 +13,16 @@ const items = [
   { label: "Services", path: "/services" },
   { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
-  { label: "Login", path: "/login" },
 ];
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   const pathname = usePathname();
+
+  const user = LoggedUserIData();
+
+  console.log("logged user info=>", user);
 
   return (
     <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white font-sans min-h-[70px] tracking-wide relative z-50">
@@ -76,19 +81,23 @@ const Navbar = () => {
 
         {/* button end positon */}
         <div className="flex items-center max-lg:ml-auto space-x-5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20px"
-            height="20px"
-            viewBox="0 0 24 24"
-            className="cursor-pointer hover:fill-[#FF3811] fill-[#444] inline"
-          >
-            <circle cx="10" cy="7" r="6" data-original="#444" />
-            <path
-              d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
-              data-original="#444"
-            />
-          </svg>
+          {/* user profile icon */}
+
+          {user?.status === "authenticated" && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20px"
+              height="20px"
+              viewBox="0 0 24 24"
+              className="cursor-pointer hover:fill-[#FF3811] fill-[#444] inline"
+            >
+              <circle cx="10" cy="7" r="6" data-original="#444" />
+              <path
+                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                data-original="#444"
+              />
+            </svg>
+          )}
 
           <span className="relative">
             <svg
@@ -109,7 +118,24 @@ const Navbar = () => {
           </span>
 
           {/* appointment button */}
-          <Button toggle={true} label={"Appointment"} outline={true} />
+
+          {user?.status === "authenticated" && (
+            <Button toggle={true} label={"Appointment"} outline={true} />
+          )}
+
+          {user?.status === "authenticated" ? (
+            <button
+              onClick={() => {
+                signOut();
+              }}
+            >
+              <Button label={"Logout"} />
+            </button>
+          ) : (
+            <Link href={"/login"}>
+              <Button label={"Login"} />
+            </Link>
+          )}
 
           {/* toggle menu open button for small deivce */}
           <button onClick={() => setToggle(true)} className="lg:hidden !ml-7">
