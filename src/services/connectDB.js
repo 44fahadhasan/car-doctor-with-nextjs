@@ -44,10 +44,10 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 
 //
 //  other way
-const uri = `mongodb+srv://${process.env.NEXT_PUBLIC_DB_USER}:${process.env.NEXT_PUBLIC_DB_PASS}@cluster0.hlpwrg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+// const uri = `mongodb+srv://${process.env.NEXT_PUBLIC_DB_USER}:${process.env.NEXT_PUBLIC_DB_PASS}@cluster0.hlpwrg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // connect with local mongodb campass
-// const uri = "mongodb://localhost:27017";
+const uri = "mongodb://localhost:27017";
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -65,6 +65,9 @@ const collections = async () => {
     // collection one
     const usersCollection = database.collection("users");
 
+    // collection two
+    const servicesCollection = database.collection("services");
+
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
@@ -76,6 +79,7 @@ const collections = async () => {
     // return all collection
     return {
       usersCollection,
+      servicesCollection,
     };
 
     //

@@ -1,10 +1,15 @@
 import Button from "@/components/common/Button";
-import { services } from "@/lib/services";
+import { dataLoader } from "@/services/dataLoader";
 import Link from "next/link";
 import SectionComtent from "../SectionComtent";
 import Card from "./Card";
 
-const Services = () => {
+const Services = async () => {
+  // load data form api
+  const services = await dataLoader(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/get-services`
+  );
+
   return (
     <div>
       <SectionComtent
