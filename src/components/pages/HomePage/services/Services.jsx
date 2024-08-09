@@ -6,9 +6,7 @@ import Card from "./Card";
 
 const Services = async () => {
   // load data form api
-  const services = await dataLoader(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/get-services`
-  );
+  const services = await dataLoader("/api/get-services");
 
   return (
     <div>
