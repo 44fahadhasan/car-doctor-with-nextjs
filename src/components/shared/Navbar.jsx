@@ -13,6 +13,7 @@ const items = [
   { label: "Services", path: "/services" },
   { label: "Blog", path: "/blog" },
   { label: "Contact", path: "/contact" },
+  { label: "My Bookings", path: "/my-bookings" },
 ];
 
 const Navbar = () => {

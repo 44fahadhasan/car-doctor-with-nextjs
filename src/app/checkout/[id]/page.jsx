@@ -45,6 +45,7 @@ const CheckOutPage = ({ params }) => {
       date: input.date.value,
       message: input.message.value,
       serviceId: serviceData?._id,
+      title: serviceData?.title,
     };
 
     // post request with fetch in server
