@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const InputFiled = ({
   label,
+  defaultValue,
   name,
   type,
   required,
@@ -10,6 +11,7 @@ const InputFiled = ({
   icon,
   openIcon,
   closeIcon,
+  disabled,
 }) => {
   const [toggle, setToggle] = useState(false);
 
@@ -18,7 +20,9 @@ const InputFiled = ({
       <label className="text-[#444] text-sm mb-2 block">{label}</label>
       <div className="relative flex items-center">
         <input
+          disabled={disabled}
           name={name}
+          defaultValue={defaultValue}
           type={(toggle && "text") || type}
           required={required}
           className="w-full text-sm text-[#A2A2A2] border border-[#E8E8E8] px-4 py-3 rounded-lg outline-[#FF3811]"

@@ -68,6 +68,9 @@ const collections = async () => {
     // collection two
     const servicesCollection = database.collection("services");
 
+    // collection three
+    const bookingsCollection = database.collection("bookings");
+
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
@@ -80,6 +83,7 @@ const collections = async () => {
     return {
       usersCollection,
       servicesCollection,
+      bookingsCollection,
     };
 
     //
