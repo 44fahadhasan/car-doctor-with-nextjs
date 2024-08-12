@@ -1,10 +1,13 @@
 import Login from "@/components/pages/LoginPage/Login";
+import { Suspense } from "react";
 
 const LoginPage = () => {
   return (
-    <div>
-      <Login />
-    </div>
+    <Suspense>
+      <div>
+        <Login />
+      </div>
+    </Suspense>
   );
 };
 

@@ -1,10 +1,13 @@
 import Singup from "@/components/pages/SingupPage/Singup";
+import { Suspense } from "react";
 
 const page = () => {
   return (
-    <div>
-      <Singup />
-    </div>
+    <Suspense>
+      <div>
+        <Singup />
+      </div>
+    </Suspense>
   );
 };
 

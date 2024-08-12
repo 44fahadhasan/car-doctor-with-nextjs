@@ -11,7 +11,9 @@ import { MdEmail } from "react-icons/md";
 const Login = () => {
   const router = useRouter();
 
-  const path = useSearchParams().get("redirectKoro");
+  const params = useSearchParams();
+
+  const path = params.get("redirectKoro");
 
   // handle login
   const handleLogin = async (event) => {

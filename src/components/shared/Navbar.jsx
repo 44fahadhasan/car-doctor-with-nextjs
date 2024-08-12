@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const user = LoggedUserIData();
 
-  console.log("logged user info=>", user);
+  // console.log("logged user info=>", user);
 
   return (
     <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white font-sans min-h-[70px] tracking-wide relative z-50">

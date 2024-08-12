@@ -12,7 +12,9 @@ const SocailLogin = () => {
 
   const router = useRouter();
 
-  const path = useSearchParams().get("redirectKoro");
+  const params = useSearchParams();
+
+  const path = params.get("redirectKoro");
 
   const userInfo = LoggedUserIData();
 
