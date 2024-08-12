@@ -1,4 +1,5 @@
 import collections from "@/services/connectDB";
+import { ObjectId } from "mongodb";
 
 export const DELETE = async (req, { params }) => {
   const deleteId = params.id;
@@ -6,7 +7,9 @@ export const DELETE = async (req, { params }) => {
   try {
     const { bookingsCollection } = await collections();
 
-    const res = await bookingsCollection.deleteOne({ _id: deleteId });
+    const res = await bookingsCollection.deleteOne({
+      _id: new ObjectId(deleteId),
+    });
 
     return Response.json(res);
     //
