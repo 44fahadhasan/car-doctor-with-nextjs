@@ -1,5 +1,6 @@
 import collections from "@/services/connectDB";
 import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 // get a single booking api
 export const GET = async (req, { params }) => {
@@ -12,10 +13,10 @@ export const GET = async (req, { params }) => {
       _id: new ObjectId(id),
     });
 
-    return Response.json(res);
+    return NextResponse.json(res);
     //
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };
 
@@ -44,10 +45,10 @@ export const PATCH = async (req, { params }) => {
       }
     );
 
-    return Response.json(res);
+    return NextResponse.json(res);
     //
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };
 
@@ -62,9 +63,9 @@ export const DELETE = async (req, { params }) => {
       _id: new ObjectId(id),
     });
 
-    return Response.json(res);
+    return NextResponse.json(res);
     //
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };

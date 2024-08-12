@@ -1,4 +1,5 @@
 import collections from "@/services/connectDB";
+import { NextResponse } from "next/server";
 
 // single user bookings api
 export const GET = async (req, { params }) => {
@@ -9,9 +10,9 @@ export const GET = async (req, { params }) => {
 
     const res = await bookingsCollection.find({ email: userEmail }).toArray();
 
-    return Response.json(res);
+    return NextResponse.json(res);
     //
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };

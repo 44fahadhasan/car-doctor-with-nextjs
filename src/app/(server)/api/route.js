@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export const GET = () => {
-  return Response.json("Wellcome to Car Doctor Server");
+  return NextResponse.json("Wellcome to Car Doctor Server");
 };

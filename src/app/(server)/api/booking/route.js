@@ -1,4 +1,5 @@
 import collections from "@/services/connectDB";
+import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
   const bookingData = await req.json();
@@ -8,10 +9,10 @@ export const POST = async (req) => {
 
     const res = await bookingsCollection.insertOne(bookingData);
 
-    return Response.json(res);
+    return NextResponse.json(res);
 
     //
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };

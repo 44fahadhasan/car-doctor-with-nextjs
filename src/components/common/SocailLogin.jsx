@@ -2,7 +2,7 @@
 
 import LoggedUserIData from "@/hooks/LoggedUserIData";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { SiGithub } from "react-icons/si";
@@ -12,10 +12,12 @@ const SocailLogin = () => {
 
   const router = useRouter();
 
+  const path = useSearchParams().get("redirectKoro");
+
   const userInfo = LoggedUserIData();
 
   const handleSocailLogin = (provider) => {
-    signIn(provider, { redirect: false });
+    signIn(provider, { redirect: true, callbackUrl: path ? path : "/" });
   };
 
   // when login succes with socail then redirect home page

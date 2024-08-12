@@ -1,4 +1,5 @@
 import collections from "@/services/connectDB";
+import { NextResponse } from "next/server";
 
 // save all services data from database with this api
 
@@ -7,9 +8,9 @@ export const GET = async () => {
     const { servicesCollection } = await collections();
     const res = await servicesCollection.find().toArray();
 
-    return Response.json(res);
+    return NextResponse.json(res);
     //
   } catch (error) {
-    return Response.json(error);
+    return NextResponse.json(error);
   }
 };

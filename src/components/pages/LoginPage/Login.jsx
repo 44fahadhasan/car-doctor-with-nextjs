@@ -4,12 +4,14 @@ import InputFiled from "@/components/common/InputFiled";
 import SmallTitle from "@/components/common/SmallTitle";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 const Login = () => {
   const router = useRouter();
+
+  const path = useSearchParams().get("redirectKoro");
 
   // handle login
   const handleLogin = async (event) => {
@@ -23,7 +25,8 @@ const Login = () => {
     const res = await signIn("credentials", {
       email,
       password,
-      redirect: false,
+      redirect: true,
+      callbackUrl: path ? path : "/",
     });
 
     // when login succesfull then redirect home page

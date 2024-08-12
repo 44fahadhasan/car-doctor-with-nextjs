@@ -43,6 +43,35 @@ const MyBookinsPage = () => {
     }
   };
 
+  const updateBooking = {
+    date: "26-03-2001",
+  };
+
+  // handle bookings update
+  const handleBookingsUpdate = async (id) => {
+    // delete request with fetch in server for my bookings
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/bookingsCrud/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updateBooking),
+        headers: {
+          "content-type": "aplication/json",
+        },
+      }
+    );
+
+    const { acknowledged, modifiedCount } = await res.json();
+
+    if (acknowledged && modifiedCount > 0) {
+      alert("Updated succesfully");
+      // ui update
+      loadData(data?.user?.email);
+    } else if (data?.message) {
+      alert(`${data?.message}`);
+    }
+  };
+
   return (
     <div className="overflow-x-auto py-12">
       <table className="min-w-full divide-y divide-gray-200">
@@ -74,7 +103,12 @@ const MyBookinsPage = () => {
               <td className="px-4 py-4 text-sm text-gray-800">{price}</td>
               <td className="px-4 py-4 text-sm text-gray-800">{date}</td>
               <td className="px-4 py-4 text-sm text-gray-800">
-                <button className="text-blue-600 mr-4">Edit</button>
+                <button
+                  onClick={() => handleBookingsUpdate(_id)}
+                  className="text-blue-600 mr-4"
+                >
+                  Edit
+                </button>
 
                 {/* delete button */}
                 <button
