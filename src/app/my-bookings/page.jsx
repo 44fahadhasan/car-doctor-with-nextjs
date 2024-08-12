@@ -26,7 +26,7 @@ const MyBookinsPage = () => {
   const handleBookingsDelete = async (id) => {
     // delete request with fetch in server for my bookings
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/bookings-delete/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/bookingsCrud/${id}`,
       {
         method: "DELETE",
       }
